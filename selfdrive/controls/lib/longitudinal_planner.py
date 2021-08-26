@@ -178,7 +178,7 @@ class Planner():
     longitudinalPlan.fcw = self.fcw
 
     longitudinalPlan.visionTurnControllerState = self.vision_turn_controller.state
-    longitudinalPlan.visionTurnSpeed = self.vision_turn_controller.v_turn
+    longitudinalPlan.visionTurnSpeed = float(self.vision_turn_controller.v_turn)
 
     longitudinalPlan.speedLimitControlState = self.speed_limit_controller.state
     longitudinalPlan.speedLimit = float(self.speed_limit_controller.speed_limit)
