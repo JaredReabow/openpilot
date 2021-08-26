@@ -808,7 +808,6 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
     ET.SOFT_DISABLE: SoftDisableAlert("High CPU Usage: Poor Performance"),
     #ET.PERMANENT: NormalPermanentAlert("System Malfunction", "Reboot your Device"),
     #ET.NO_ENTRY: NoEntryAlert("System Malfunction: Reboot Your Device",
-                              audible_alert=AudibleAlert.chimeDisengage),
   },
 
   EventName.accFaulted: {
