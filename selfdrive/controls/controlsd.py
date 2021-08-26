@@ -277,7 +277,7 @@ class Controls:
     elif not self.sm.valid["pandaState"]:
       self.events.add(EventName.usbError)
     elif not self.sm.all_alive_and_valid():
-      self.events.add(EventName.commIssue)
+      #self.events.add(EventName.commIssue)
       if not self.logged_comm_issue:
         invalid = [s for s, valid in self.sm.valid.items() if not valid]
         not_alive = [s for s, alive in self.sm.alive.items() if not alive]
