@@ -24,10 +24,10 @@ VisualAlert = car.CarControl.HUDControl.VisualAlert
 
 ###### SPAS ######
 STEER_ANG_MAX = 250         # SPAS Max Angle
-# nissan limits values
+#MAX DELTA V limits values
 ANGLE_DELTA_BP = [0., 5., 15.]
-ANGLE_DELTA_V = [0.6, .4, .15]     # windup limit
-ANGLE_DELTA_VU = [0.8, 0.6, 0.4]   # unwind limit
+ANGLE_DELTA_V = [0.4, .25, .15]     # windup limit
+ANGLE_DELTA_VU = [0.6, 0.4, 0.2]   # unwind limit
 TQ = 20 # = 1 NM * 100 is unit of measure for wheel.
 SPAS_SWITCH = 41 * CV.MPH_TO_MS #MPH
 ###### SPAS #######
@@ -141,6 +141,10 @@ class CarController():
     spas_active = CS.spas_enabled and enabled and (self.spas_always or CS.out.vEgo < SPAS_SWITCH) 
     lkas_active = enabled and abs(CS.out.steeringAngleDeg) < CS.CP.maxSteeringAngleDeg and not spas_active
     self.lkas_active = lkas_active
+    if spas_active and -1 > apply_angle < 1:
+      spas_active = True
+    if lkas_active and 50 * CV.MPH_TO_MS > CS.out.vEgo < SPAS_SWITCH and -25 > apply_angle < 25:
+      spas_active = True
     if not lkas_active:
       apply_steer = 0
     if enabled and TQ <= CS.out.steeringWheelTorque <= -TQ:
@@ -168,7 +172,7 @@ class CarController():
 
     # Disable steering while turning blinker on and speed below 60 kph
     if CS.out.leftBlinker or CS.out.rightBlinker:
-      self.turning_signal_timer = 0.5 / DT_CTRL  # Disable for 0.5 Seconds after blinker turned off
+      self.turning_signal_timer = 1.0 / DT_CTRL  # Disable for 1.0 Seconds after blinker turned off
     if self.turning_indicator_alert and enabled: # set and clear by interface
       lkas_active = False
       spas_active = False
@@ -214,7 +218,7 @@ class CarController():
     # self.prev_scc_cnt = CS.scc11["AliveCounterACC"]
     # self.scc_update_frame = frame
 
-    self.prev_scc_cnt = CS.scc11["AliveCounterACC"]
+    self.prev_scc_cnt = CS.scc11["AliveCounterACC"] if not CS.no_radar else 0
 
     self.lkas11_cnt = (self.lkas11_cnt + 1) % 0x10
     self.scc12_cnt %= 0xF
@@ -270,14 +274,16 @@ class CarController():
     self.scc_smoother.update(enabled, can_sends, self.packer, CC, CS, frame, apply_accel, controls)
 
     controls.apply_accel = apply_accel
-    aReqValue = CS.scc12["aReqValue"]
-    controls.aReqValue = aReqValue
 
-    if aReqValue < controls.aReqValueMin:
-      controls.aReqValueMin = controls.aReqValue
+    if not CS.no_radar:
+      aReqValue = CS.scc12["aReqValue"]
+      controls.aReqValue = aReqValue
 
-    if aReqValue > controls.aReqValueMax:
-      controls.aReqValueMax = controls.aReqValue
+      if aReqValue < controls.aReqValueMin:
+        controls.aReqValueMin = controls.aReqValue
+
+      if aReqValue > controls.aReqValueMax:
+        controls.aReqValueMax = controls.aReqValue
 
     # send scc to car if longcontrol enabled and SCC not on bus 0 or ont live
     if self.longcontrol and CS.cruiseState_enabled and (CS.scc_bus or not self.scc_live) and frame % 2 == 0:

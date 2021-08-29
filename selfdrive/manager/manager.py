@@ -13,7 +13,7 @@ from common.basedir import BASEDIR
 from common.params import Params, ParamKeyType
 from common.text_window import TextWindow
 from selfdrive.boardd.set_time import set_time
-from selfdrive.hardware import HARDWARE, PC
+from selfdrive.hardware import HARDWARE, PC, EON
 from selfdrive.manager.helpers import unblock_stdout
 from selfdrive.manager.process import ensure_running, launcher
 from selfdrive.manager.process_config import managed_processes
@@ -59,8 +59,6 @@ def manager_init():
     ("TurnVisionControl", "1"),
     ("UseSMDPSHarness", "0"),
     ("SSCOD", "0"),
-    ("RVL", "0"),
-
     ("DisableUpdates", "0"),
     ("LoggerEnabled", "0"),
     ("CleanUI", "1"),
@@ -70,13 +68,12 @@ def manager_init():
     ("PutPrebuilt", "0"),
     ("TPMS_Alerts", "1"),
     ("spasAlways", "0"),
-
     ("PutPrebuilt", "0"),
-    ("TPMS_Alerts", "1"),
     ("StockNaviDecelEnabled", "0"),
     ("ShowDebugUI", "0"),
     ("CustomLeadMark", "0"),
-    ("HyundaiNaviSL", "0")
+    ("HyundaiNaviSL", "0"),
+    ("LowSpeedAlerts", "1")
   ]
   if not PC:
     default_params.append(("LastUpdateTime", datetime.datetime.utcnow().isoformat().encode('utf8')))
@@ -152,8 +149,10 @@ def manager_thread():
 
   Process(name="shutdownd", target=launcher, args=("selfdrive.shutdownd",)).start()
   Process(name="road_speed_limiter", target=launcher, args=("selfdrive.road_speed_limiter",)).start()
-  system("am startservice com.neokii.optool/.MainService")
-  system("am startservice com.neokii.openpilot/.MainService")
+
+  if EON:
+    system("am startservice com.neokii.optool/.MainService")
+    system("am startservice com.neokii.openpilot/.MainService")
 
   cloudlog.info("manager start")
   cloudlog.info({"environ": os.environ})

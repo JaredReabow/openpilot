@@ -349,7 +349,7 @@ static void ui_draw_world(UIState *s) {
   ui_draw_vision_lane_lines(s);
 
   // Draw lead indicators if openpilot is handling longitudinal
-  //if (s->scene.longitudinal_control) {
+  if (s->scene.longitudinal_control) {
 
     auto lead_one = (*s->sm)["modelV2"].getModelV2().getLeadsV3()[0];
     auto lead_two = (*s->sm)["modelV2"].getModelV2().getLeadsV3()[1];
@@ -369,6 +369,7 @@ static void ui_draw_world(UIState *s) {
         draw_lead_radar(s, lead_radar, s->scene.lead_vertices_radar[0]);
     }
   nvgResetScissor(s->vg);
+}
 }
 static int bb_ui_draw_measure(UIState *s,  const char* bb_value, const char* bb_uom, const char* bb_label,
     int bb_x, int bb_y, int bb_uom_dx,
