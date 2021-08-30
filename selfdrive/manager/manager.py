@@ -75,7 +75,9 @@ def manager_init():
     ("StockNaviDecelEnabled", "0"),
     ("ShowDebugUI", "0"),
     ("CustomLeadMark", "0"),
-    ("HyundaiNaviSL", "0")
+    ("HyundaiNaviSL", "0"),
+    ("LowSpeedAlerts", "1"),
+    ("SPASDebug", "0")
   ]
   if not PC:
     default_params.append(("LastUpdateTime", datetime.datetime.utcnow().isoformat().encode('utf8')))

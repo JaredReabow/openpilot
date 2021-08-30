@@ -402,7 +402,8 @@ class CarController():
       # SPAS12 20Hz
       if (frame % 5) == 0:
         can_sends.append(create_spas12(CS.mdps_bus))
-        #print("MDPS SPAS State: ", CS.mdps11_stat) # SPAS STATE DEBUG
-        #print("OP SPAS State: ", self.en_spas) # OpenPilot Ask MDPS to switch to state.
+        if Params().get_bool('SPASDebug'):
+          print("MDPS SPAS State: ", CS.mdps11_stat) # SPAS STATE DEBUG
+          print("OP SPAS State: ", self.en_spas) # OpenPilot Ask MDPS to switch to state.
 
     return can_sends
