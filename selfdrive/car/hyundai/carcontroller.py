@@ -142,6 +142,15 @@ class CarController():
     self.lkas_active = lkas_active
     if not lkas_active:
       apply_steer = 0
+    if spas_active:
+      apply_steer = 0
+    if spas_active and -1 > apply_angle < 1:
+      spas_active = True
+      apply_steer = 0
+    if lkas_active and 50 * CV.MPH_TO_MS > CS.out.vEgo < SPAS_SWITCH and -25 > apply_angle < 25:
+      spas_active = True
+      apply_steer = 0
+    
     if enabled and TQ <= CS.out.steeringWheelTorque <= -TQ:
       spas_active = False
     
