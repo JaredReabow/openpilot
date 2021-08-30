@@ -177,9 +177,7 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   });
   main_layout->addWidget(gitpullbtn);
   main_layout->addWidget(horizontal_line());
-
-  main_layout->addWidget(pandarecoverbtn);
-  main_layout->addWidget(horizontal_line());
+  
   auto nTune = new ButtonControl("Run nTune AutoTune for lateral.", "nTune", "Run this after 20 or so miles of driving, to Auto Tune Lateral control.");
   QObject::connect(nTune, &ButtonControl::clicked, [=]() { 
     if (Params().getBool("IsOffroad") && ConfirmationDialog::confirm("Run nTune? This Lags click only ONCE please be patient.", this)){
@@ -506,12 +504,6 @@ QWidget * community_panel() {
   toggles_list->addWidget(new ParamControl("UseLQR",
                                             "Enable LQR Lateral Control",
                                             "For Linear Quadratic Ratio Control: Warning please run nTune after 15-20 miles of driving.",
-                                            "../assets/offroad/icon_road.png"
-                                              ));
-  toggles_list->addWidget(horizontal_line());
-  toggles_list->addWidget(new ParamControl("spasEnabled",
-                                            "Enable SPAS.",
-                                            "Enable Send Parking Assist Messages up to 6MPH. Warning: It is beta, be careful!!",
                                             "../assets/offroad/icon_road.png"
                                               ));
   toggles_list->addWidget(horizontal_line());
