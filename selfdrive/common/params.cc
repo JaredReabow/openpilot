@@ -258,6 +258,7 @@ std::unordered_map<std::string, uint32_t> keys = {
     {"spasAlways", PERSISTENT},
     {"HyundaiNaviSL", PERSISTENT},
     {"LowSpeedAlerts", PERSISTENT},
+    {"SPASDebug", PERSISTENT},
 };
 
 } // namespace
