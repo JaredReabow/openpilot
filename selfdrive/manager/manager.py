@@ -76,7 +76,6 @@ def manager_init():
     ("ShowDebugUI", "0"),
     ("CustomLeadMark", "0"),
     ("HyundaiNaviSL", "0"),
-    ("LowSpeedAlerts", "1"),
     ("SPASDebug", "0")
   ]
   if not PC:
