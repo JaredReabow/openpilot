@@ -5,7 +5,7 @@ Version 0.8.8 (2021-08-XX)
 * OpenPilot now correctly reads and handles all SPAS states
 * Fixed SPAS.
 * Fixed SPAS to KLAS switch. 
-  * Switches at 45MPH
+  * Switches at 41MPH
 * Fixed wobbles
  * New driving model with improved laneless performance
    * Trained on 5000+ hours of diverse driving data from 3000+ users in 40+ countries
