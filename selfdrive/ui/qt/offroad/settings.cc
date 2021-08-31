@@ -106,6 +106,11 @@ TogglesPanel::TogglesPanel(QWidget *parent) : QWidget(parent) {
                                   "Set speed limit slightly higher than actual speed limit for a more natural drive.",
                                   "../assets/offroad/icon_speed_limit.png",
                                   this));
+  toggles.append(new ParamControl("SpeedLimitDelayIncrease",
+                                  "Delay increase of speed limit",
+                                  "Delays the increase of the speed limit to give time to the driver to cancel the increase by changing cruise speed.",
+                                  "../assets/offroad/icon_speed_limit.png",
+                                  this));
   toggles.append(new ParamControl("TurnSpeedControl",
                                   "Enable Map Data Turn Control",
                                   "Use curvature info from map data to define speed limits to take turns ahead",
@@ -509,7 +514,7 @@ QWidget * community_panel() {
                                               ));
   toggles_list->addWidget(horizontal_line());
   toggles_list->addWidget(new ParamControl("EMS",
-                                            "Enabled is EMS366. Disabled is EMS11.",
+                                            "Disabled = EMS11 / Enabled = EMS366",
                                             "Select your cars EMS type. All Genesis, Kona, and Kia Stinger auto select EMS366.",
                                             "../assets/offroad/icon_road.png"
                                               ));
