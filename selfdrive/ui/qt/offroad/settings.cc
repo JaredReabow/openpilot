@@ -515,7 +515,7 @@ QWidget * community_panel() {
   toggles_list->addWidget(horizontal_line());
   toggles_list->addWidget(new ParamControl("EMS",
                                             "Enabled is EMS366. Disabled is EMS11.",
-                                            "Select your cars EMS type. Genesis and Kia Stinger auto select.",
+                                            "Select your cars EMS type. All Genesis, Kona, and Kia Stinger auto select EMS366.",
                                             "../assets/offroad/icon_road.png"
                                               ));
   toggles_list->addWidget(horizontal_line());

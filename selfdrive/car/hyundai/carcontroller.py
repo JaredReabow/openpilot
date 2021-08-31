@@ -356,7 +356,7 @@ class CarController():
             spas_active_stat = True
           else:
             spas_active_stat = False
-        if Params().get_bool('EMS') or self.car_fingerprint == CAR.STINGER or self.car_fingerprint == CAR.GENESIS_G90 or self.car_fingerprint == CAR.GENESIS or self.car_fingerprint == CAR.GENESIS_G80 or self.car_fingerprint == CAR.GENESIS_G70 or self.car_fingerprint == CAR.GENESIS_EQ900_L or self.car_fingerprint == CAR.GENESIS_EQ900:
+        if Params().get_bool('EMS') or self.car_fingerprint == CAR.KONA_EV or self.car_fingerprint == CAR.KONA_HEV or self.car_fingerprint == CAR.KONA or self.car_fingerprint == CAR.STINGER or self.car_fingerprint == CAR.GENESIS_G90 or self.car_fingerprint == CAR.GENESIS or self.car_fingerprint == CAR.GENESIS_G80 or self.car_fingerprint == CAR.GENESIS_G70 or self.car_fingerprint == CAR.GENESIS_EQ900_L or self.car_fingerprint == CAR.GENESIS_EQ900:
           can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
           if Params().get_bool('SPASDebug'):
             print("EMS366")
