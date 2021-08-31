@@ -17,7 +17,6 @@ const CanMsg HYUNDAI_COMMUNITY_TX_MSGS[] = {
   {905, 0, 8},  //   SCC14,  Bus 0
   {1186, 0, 8},  //   4a2SCC, Bus 0
   {790, 1, 8}, // EMS11, Bus 1
-  {870, 1, 8}, // EMS_366, Bus 1
   {912, 0, 7}, {912,1, 7}, // SPAS11, Bus 0, 1
   {1268, 0, 8}, {1268,1, 8}, // SPAS12, Bus 0, 1
  };
@@ -211,8 +210,7 @@ static int hyundai_community_tx_hook(CAN_FIFOMailBox_TypeDef *to_send) {
   if (addr == 593) {OP_MDPS_live = 20;}
   if (addr == 1265 && bus == 1) {OP_CLU_live = 20;} // only count mesage created for MDPS
   if (addr == 1057) {OP_SCC_live = 20; if (car_SCC_live > 0) {car_SCC_live -= 1;}}
-  if (addr == 870 && addr == 790) {OP_EMS_live = 20;}
-
+  if (addr == 790) {OP_EMS_live = 20;}
   // 1 allows the message through
   return tx;
 }
@@ -229,7 +227,7 @@ static int hyundai_community_fwd_hook(int bus_num, CAN_FIFOMailBox_TypeDef *to_f
     if (bus_num == 0) {
       if (!OP_CLU_live || addr != 1265 || HKG_mdps_bus == 0) {
         if (!OP_MDPS_live || addr != 593) {
-          if (!OP_EMS_live || addr != 790 && addr != 870) {
+          if (!OP_EMS_live || addr != 790) {
             bus_fwd = fwd_to_bus1 == 1 ? 12 : 2;
           } else {
             bus_fwd = 2;  // EON create EMS11 for MDPS
