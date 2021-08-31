@@ -29,7 +29,7 @@ ANGLE_DELTA_BP = [0., 5., 15.]
 ANGLE_DELTA_V = [0.8, 0.5, 0.2]     # windup limit
 ANGLE_DELTA_VU = [1.0, 0.8, 0.3]   # unwind limit
 TQ = 20 # = 1 NM * 100 is unit of measure for wheel.
-SPAS_SWITCH = 41 * CV.MPH_TO_MS #MPH
+SPAS_SWITCH = 46 * CV.MPH_TO_MS #MPH
 ###### SPAS #######
 
 EventName = car.CarEvent.EventName
@@ -99,8 +99,6 @@ class CarController():
       self.mdps11_stat_last = 0
       self.spas_always = Params().get_bool('spasAlways')
       self.lkas_active = False
-      self.EMS366 = False
-      self.EMS311 = False
       
     self.ldws_opt = Params().get_bool('IsLdwsCar')
     self.stock_navi_decel_enabled = Params().get_bool('StockNaviDecelEnabled')
