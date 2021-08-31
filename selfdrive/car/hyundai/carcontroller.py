@@ -151,7 +151,7 @@ class CarController():
       spas_active = True
       apply_steer = 0
     
-    if enabled and TQ <= CS.out.steeringWheelTorque <= -TQ:
+    if enabled and TQ <= CS.out.steeringTorque <= -TQ:
       spas_active = False
     
     UseSMDPS = Params().get_bool('UseSMDPSHarness')
