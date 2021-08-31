@@ -356,8 +356,12 @@ class CarController():
             spas_active_stat = False
         if CAR.STINGER or CAR.GENESIS_G90 or CAR.GENESIS or CAR.GENESIS_G80 or CAR.GENESIS_G70 or CAR.GENESIS_EQ900_L or CAR.GENESIS_EQ900:
           can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
+          if Params().get_bool('SPASDebug'):
+            print("EMS366")
         else:
           can_sends.append(create_ems11(self.packer, CS.ems11, spas_active_stat))
+          if Params().get_bool('SPASDebug'):
+            print("EMS11")
       if (frame % 2) == 0:
         if CS.mdps11_stat == 7:
           self.en_spas = 7
