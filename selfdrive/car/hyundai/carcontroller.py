@@ -1,6 +1,6 @@
 import math
 from selfdrive.car.interfaces import CarInterfaceBase
-from selfdrive.car.hyundai.interface import CarInterface
+from selfdrive.car.hyundai.interface import CarInterface, Params
 from selfdrive.controls.lib.latcontrol_indi import LatControlINDI
 from common.numpy_fast import clip, interp
 import numpy as np
@@ -356,7 +356,7 @@ class CarController():
             spas_active_stat = True
           else:
             spas_active_stat = False
-        if self.CP.carFingerprint in [CAR.STINGER or CAR.GENESIS_G90 or CAR.GENESIS or CAR.GENESIS_G80 or CAR.GENESIS_G70 or CAR.GENESIS_EQ900_L or CAR.GENESIS_EQ900]:
+        if self.car_fingerprint == CAR.STINGER or self.car_fingerprint == CAR.GENESIS_G90 or self.car_fingerprint == CAR.GENESIS or self.car_fingerprint == CAR.GENESIS_G80 or self.car_fingerprint == CAR.GENESIS_G70 or self.car_fingerprint == CAR.GENESIS_EQ900_L or self.car_fingerprint == CAR.GENESIS_EQ900:
           can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
           self.EMS366 = True # Need to make change panda forwarding
           if Params().get_bool('SPASDebug'):
