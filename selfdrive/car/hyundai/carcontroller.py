@@ -356,7 +356,7 @@ class CarController():
             spas_active_stat = True
           else:
             spas_active_stat = False
-        if self.car_fingerprint == CAR.STINGER or self.car_fingerprint == CAR.GENESIS_G90 or self.car_fingerprint == CAR.GENESIS or self.car_fingerprint == CAR.GENESIS_G80 or self.car_fingerprint == CAR.GENESIS_G70 or self.car_fingerprint == CAR.GENESIS_EQ900_L or self.car_fingerprint == CAR.GENESIS_EQ900 or self.car_fingerprint == CAR.NIRO_HEV:
+        if self.car_fingerprint == CAR.STINGER or self.car_fingerprint == CAR.GENESIS_G90 or self.car_fingerprint == CAR.GENESIS or self.car_fingerprint == CAR.GENESIS_G80 or self.car_fingerprint == CAR.GENESIS_G70 or self.car_fingerprint == CAR.GENESIS_EQ900_L or self.car_fingerprint == CAR.GENESIS_EQ900:
           can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
           self.EMS366 = True # Need to make change panda forwarding
           if Params().get_bool('SPASDebug'):
