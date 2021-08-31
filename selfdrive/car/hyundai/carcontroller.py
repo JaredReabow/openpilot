@@ -10,7 +10,7 @@ from common.realtime import DT_CTRL
 from selfdrive.car import apply_std_steer_torque_limits
 from selfdrive.car.hyundai.hyundaican import create_lkas11, create_clu11, \
   create_scc11, create_scc12, create_scc13, create_scc14, \
-  create_mdps12, create_lfahda_mfc, create_hda_mfc, create_spas11, create_spas12, create_ems_366, create_ems11
+  create_mdps12, create_lfahda_mfc, create_hda_mfc, create_spas11, create_spas12, create_ems_366
 from selfdrive.car.hyundai.scc_smoother import SccSmoother
 from selfdrive.car.hyundai.values import Buttons, CAR, FEATURES, CarControllerParams, FEATURES
 from opendbc.can.packer import CANPacker
@@ -356,14 +356,10 @@ class CarController():
             spas_active_stat = True
           else:
             spas_active_stat = False
-        if Params().get_bool('EMS') or self.car_fingerprint == CAR.KONA_EV or self.car_fingerprint == CAR.KONA_HEV or self.car_fingerprint == CAR.KONA or self.car_fingerprint == CAR.STINGER or self.car_fingerprint == CAR.GENESIS_G90 or self.car_fingerprint == CAR.GENESIS or self.car_fingerprint == CAR.GENESIS_G80 or self.car_fingerprint == CAR.GENESIS_G70 or self.car_fingerprint == CAR.GENESIS_EQ900_L or self.car_fingerprint == CAR.GENESIS_EQ900:
-          can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
-          if Params().get_bool('SPASDebug'):
+        can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
+        if Params().get_bool('SPASDebug'):
             print("EMS366")
-        else:
-          can_sends.append(create_ems11(self.packer, CS.ems11, spas_active_stat))
-          if Params().get_bool('SPASDebug'):
-            print("EMS11")
+
       if (frame % 2) == 0:
         if CS.mdps11_stat == 7:
           self.en_spas = 7
