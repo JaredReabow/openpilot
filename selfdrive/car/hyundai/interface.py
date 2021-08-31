@@ -628,7 +628,7 @@ class CarInterface(CarInterfaceBase):
       events.events.remove(EventName.pedalPressed)
 
     if Params().get_bool('spasEnabled'):
-      if ret.vEgo < 41 * CV.MPH_TO_MS and not self.CC.lkas_active and self.CS.mdps11_stat == 7: # We need to alert driver when SPAS abort or fail.
+      if ret.vEgo < 42.9 * CV.MPH_TO_MS and not self.CC.lkas_active and self.CS.mdps11_stat == 7: # We need to alert driver when SPAS abort or fail.
         events.add(EventName.steerSaturated)
         if not self.CC.turning_indicator_alert:
           events.add(EventName.buttonCancel)
