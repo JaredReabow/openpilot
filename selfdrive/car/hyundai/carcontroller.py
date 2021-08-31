@@ -10,7 +10,7 @@ from common.realtime import DT_CTRL
 from selfdrive.car import apply_std_steer_torque_limits
 from selfdrive.car.hyundai.hyundaican import create_lkas11, create_clu11, \
   create_scc11, create_scc12, create_scc13, create_scc14, \
-  create_mdps12, create_lfahda_mfc, create_hda_mfc, create_spas11, create_spas12, create_ems_366
+  create_mdps12, create_lfahda_mfc, create_hda_mfc, create_spas11, create_spas12, create_ems_366, create_ems11
 from selfdrive.car.hyundai.scc_smoother import SccSmoother
 from selfdrive.car.hyundai.values import Buttons, CAR, FEATURES, CarControllerParams, FEATURES
 from opendbc.can.packer import CANPacker
@@ -354,8 +354,10 @@ class CarController():
             spas_active_stat = True
           else:
             spas_active_stat = False
-        can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
-        #can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active))
+        if CAR.STINGER or CAR.GENESIS_G90 or CAR.GENESIS or CAR.GENESIS_G80 or CAR.GENESIS_G70 or CAR.GENESIS_EQ900_L or CAR.GENESIS_EQ900:
+          can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
+        else:
+          can_sends.append(create_ems11(self.packer, CS.ems11, spas_active_stat))
       if (frame % 2) == 0:
         if CS.mdps11_stat == 7:
           self.en_spas = 7
