@@ -29,7 +29,7 @@ ANGLE_DELTA_BP = [0., 5., 15.]
 ANGLE_DELTA_V = [0.8, 0.5, 0.2]     # windup limit
 ANGLE_DELTA_VU = [1.0, 0.8, 0.3]   # unwind limit
 TQ = 20 # = 1 NM * 100 is unit of measure for wheel.
-SPAS_SWITCH = 41 * CV.MPH_TO_MS #MPH
+SPAS_SWITCH = 43 * CV.MPH_TO_MS #MPH
 ###### SPAS #######
 
 EventName = car.CarEvent.EventName
