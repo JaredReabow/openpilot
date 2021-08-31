@@ -147,7 +147,7 @@ class CarController():
     if enabled and spas_active and -1 > apply_angle > 1:
       spas_active = True
       apply_steer = 0
-    if lkas_active and 50 * CV.MPH_TO_MS > CS.out.vEgo < SPAS_SWITCH and -10 > apply_angle < 10:
+    if lkas_active and 50 * CV.MPH_TO_MS >= CS.out.vEgo < SPAS_SWITCH and -10 > apply_angle < 10:
       spas_active = True
       apply_steer = 0
     
