@@ -247,7 +247,6 @@ std::unordered_map<std::string, uint32_t> keys = {
     {"CustomLeadMark", PERSISTENT},
     {"UseSMDPSHarness", PERSISTENT},
     {"SSCOD", PERSISTENT},
-    {"RVL", PERSISTENT},
     {"LoggerEnabled", PERSISTENT},
     {"CleanUI", PERSISTENT},
     {"AR", PERSISTENT},
@@ -258,6 +257,7 @@ std::unordered_map<std::string, uint32_t> keys = {
     {"spasAlways", PERSISTENT},
     {"HyundaiNaviSL", PERSISTENT},
     {"SPASDebug", PERSISTENT},
+    {"EMS", PERSISTENT},
 };
 
 } // namespace

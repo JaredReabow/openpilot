@@ -1,6 +1,6 @@
 import math
 from selfdrive.car.interfaces import CarInterfaceBase
-from selfdrive.car.hyundai.interface import CarInterface
+from selfdrive.car.hyundai.interface import CarInterface, Params
 from selfdrive.controls.lib.latcontrol_indi import LatControlINDI
 from common.numpy_fast import clip, interp
 import numpy as np
@@ -24,7 +24,7 @@ VisualAlert = car.CarControl.HUDControl.VisualAlert
 
 ###### SPAS ######
 STEER_ANG_MAX = 250         # SPAS Max Angle
-# nissan limits values
+#MAX DELTA V limits values
 ANGLE_DELTA_BP = [0., 5., 15.]
 ANGLE_DELTA_V = [0.8, 0.5, 0.2]     # windup limit
 ANGLE_DELTA_VU = [1.0, 0.8, 0.3]   # unwind limit
@@ -99,6 +99,8 @@ class CarController():
       self.mdps11_stat_last = 0
       self.spas_always = Params().get_bool('spasAlways')
       self.lkas_active = False
+      self.EMS366 = False
+      self.EMS311 = False
       
     self.ldws_opt = Params().get_bool('IsLdwsCar')
     self.stock_navi_decel_enabled = Params().get_bool('StockNaviDecelEnabled')
@@ -151,7 +153,7 @@ class CarController():
       spas_active = True
       apply_steer = 0
     
-    if enabled and TQ <= CS.out.steeringTorque <= -TQ:
+    if enabled and TQ <= CS.out.steeringWheelTorque <= -TQ:
       spas_active = False
     
     UseSMDPS = Params().get_bool('UseSMDPSHarness')
@@ -278,6 +280,7 @@ class CarController():
     self.scc_smoother.update(enabled, can_sends, self.packer, CC, CS, frame, apply_accel, controls)
 
     controls.apply_accel = apply_accel
+
     if not CS.no_radar:
       aReqValue = CS.scc12["aReqValue"]
       controls.aReqValue = aReqValue
@@ -353,7 +356,7 @@ class CarController():
             spas_active_stat = True
           else:
             spas_active_stat = False
-        if CAR.STINGER or CAR.GENESIS_G90 or CAR.GENESIS or CAR.GENESIS_G80 or CAR.GENESIS_G70 or CAR.GENESIS_EQ900_L or CAR.GENESIS_EQ900:
+        if Params().get_bool('EMS') or self.car_fingerprint == CAR.KONA_EV or self.car_fingerprint == CAR.KONA_HEV or self.car_fingerprint == CAR.KONA or self.car_fingerprint == CAR.STINGER or self.car_fingerprint == CAR.GENESIS_G90 or self.car_fingerprint == CAR.GENESIS or self.car_fingerprint == CAR.GENESIS_G80 or self.car_fingerprint == CAR.GENESIS_G70 or self.car_fingerprint == CAR.GENESIS_EQ900_L or self.car_fingerprint == CAR.GENESIS_EQ900:
           can_sends.append(create_ems_366(self.packer, CS.ems_366, spas_active_stat))
           if Params().get_bool('SPASDebug'):
             print("EMS366")

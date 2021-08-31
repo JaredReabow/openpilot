@@ -58,8 +58,6 @@ def manager_init():
     ("TurnVisionControl", "1"),
     ("UseSMDPSHarness", "0"),
     ("SSCOD", "0"),
-    ("RVL", "0"),
-
     ("DisableUpdates", "0"),
     ("LoggerEnabled", "0"),
     ("CleanUI", "1"),
@@ -69,14 +67,13 @@ def manager_init():
     ("PutPrebuilt", "0"),
     ("TPMS_Alerts", "1"),
     ("spasAlways", "0"),
-
     ("PutPrebuilt", "0"),
-    ("TPMS_Alerts", "1"),
     ("StockNaviDecelEnabled", "0"),
     ("ShowDebugUI", "0"),
     ("CustomLeadMark", "0"),
     ("HyundaiNaviSL", "0"),
-    ("SPASDebug", "0")
+    ("SPASDebug", "0"),
+    ("EMS", "0")
   ]
   if not PC:
     default_params.append(("LastUpdateTime", datetime.datetime.utcnow().isoformat().encode('utf8')))

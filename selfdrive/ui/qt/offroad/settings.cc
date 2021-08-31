@@ -172,28 +172,7 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   });
   main_layout->addWidget(gitpullbtn);
   main_layout->addWidget(horizontal_line());
-
-  const char* panda_flash = "sh /data/openpilot/panda/board/flash.sh";
-  auto pandaflashbtn = new ButtonControl("Flash Panda Firmware", "RUN");
-  QObject::connect(pandaflashbtn, &ButtonControl::clicked, [=]() {
-    std::system(panda_flash);
-    if (ConfirmationDialog::confirm("Process Completed. Reboot?", this)){
-      QTimer::singleShot(1000, []() { Hardware::reboot(); });
-    }
-  });
-  main_layout->addWidget(pandaflashbtn);
-  main_layout->addWidget(horizontal_line());
-
-  const char* panda_recover = "sh /data/openpilot/panda/board/recover.sh";
-  auto pandarecoverbtn = new ButtonControl("Panda Recover Firmware", "RUN");
-  QObject::connect(pandarecoverbtn, &ButtonControl::clicked, [=]() {
-    std::system(panda_recover);
-    if (ConfirmationDialog::confirm("Process Completed. Reboot?", this)){
-      QTimer::singleShot(1000, []() { Hardware::reboot(); });
-    }
-  });
-  main_layout->addWidget(pandarecoverbtn);
-  main_layout->addWidget(horizontal_line());
+  
   auto nTune = new ButtonControl("Run nTune AutoTune for lateral.", "nTune", "Run this after 20 or so miles of driving, to Auto Tune Lateral control.");
   QObject::connect(nTune, &ButtonControl::clicked, [=]() { 
     if (Params().getBool("IsOffroad") && ConfirmationDialog::confirm("Run nTune? This Lags click only ONCE please be patient.", this)){
@@ -529,6 +508,12 @@ QWidget * community_panel() {
                                             "../assets/offroad/icon_road.png"
                                               ));
   toggles_list->addWidget(horizontal_line());
+  toggles_list->addWidget(new ParamControl("EMS",
+                                            "Enabled is EMS366. Disabled is EMS11.",
+                                            "Select your cars EMS type. All Genesis, Kona, and Kia Stinger auto select EMS366.",
+                                            "../assets/offroad/icon_road.png"
+                                              ));
+  toggles_list->addWidget(horizontal_line());
   toggles_list->addWidget(new ParamControl("SPASDebug",
                                             "Enable SPAS Debugging.",
                                             "This outputs OP SPAS State: (The state that op is calling MDPS to) and MDPS SPAS State: (The state MDPS is actually in)",
@@ -582,7 +567,7 @@ QWidget * community_panel() {
                                             ));
   toggles_list->addWidget(horizontal_line());
   toggles_list->addWidget(new ParamControl("StockNaviDecelEnabled",
-                                            "Stock Navi based deceleration",
+                                            "Neokii Stock Navi based deceleration",
                                             "Use the stock navi based deceleration for longcontrol",
                                             "../assets/offroad/icon_road.png"
                                             ));
@@ -615,11 +600,6 @@ QWidget * community_panel() {
                                             ));
                                             
   toggles_list->addWidget(horizontal_line());        
-  toggles_list->addWidget(new ParamControl("RVL",
-                                            "Bring Back my Lead Markers",
-                                            "This is very misleading and can cause confusion, if HKG Long isn't on and working properly!DO NOT MISTAKE OP LEADS FOR WHAT YOUR CAR SEE'S. Please procceed with caution.",
-                                            "../assets/offroad/icon_road.png"
-                                            ));     
 
   QWidget *widget = new QWidget;
   widget->setLayout(toggles_list);

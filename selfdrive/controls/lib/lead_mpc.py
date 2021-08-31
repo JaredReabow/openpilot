@@ -64,6 +64,7 @@ class LeadMpc():
       lead = radarstate.leadTwo
     self.status = lead.status
 
+
     # Setup current mpc state
     self.cur_state[0].x_ego = 0.0
 
