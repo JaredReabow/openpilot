@@ -71,6 +71,7 @@ def manager_init():
     ("StockNaviDecelEnabled", "0"),
     ("ShowDebugUI", "0"),
     ("CustomLeadMark", "0"),
+    ("HyundaiNaviSL", "0"),
     ("SPASDebug", "0"),
     ("EMS", "0")
   ]
