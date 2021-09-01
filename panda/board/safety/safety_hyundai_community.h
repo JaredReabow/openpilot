@@ -16,7 +16,7 @@ const CanMsg HYUNDAI_COMMUNITY_TX_MSGS[] = {
   {1290, 0, 8}, //   SCC13,  Bus 0
   {905, 0, 8},  //   SCC14,  Bus 0
   {1186, 0, 8},  //   4a2SCC, Bus 0
-  {881, 1, 8}, // EMS11, Bus 1 could be 881
+  {790, 1, 8}, // EMS11, Bus 1 could be 881
   {912, 0, 7}, {912,1, 7}, // SPAS11, Bus 0, 1
   {1268, 0, 8}, {1268,1, 8}, // SPAS12, Bus 0, 1
  };
