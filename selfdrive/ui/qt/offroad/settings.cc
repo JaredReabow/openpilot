@@ -180,7 +180,7 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
   
   auto nTune = new ButtonControl("Run nTune AutoTune for lateral.", "nTune", "Run this after 20 or so miles of driving, to Auto Tune Lateral control.");
   QObject::connect(nTune, &ButtonControl::clicked, [=]() { 
-    if ConfirmationDialog::confirm("Run nTune? This Lags click only ONCE please be patient.", this)){
+    if (ConfirmationDialog::confirm("Run nTune? This Lags click only ONCE please be patient.", this)){
       std::system("cd /data/openpilot/selfdrive && python ntune.py");
       if (ConfirmationDialog::confirm("nTune Ran Successfully.", this)){
       }    
