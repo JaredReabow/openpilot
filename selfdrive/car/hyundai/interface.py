@@ -62,7 +62,7 @@ class CarInterface(CarInterfaceBase):
     if not Params().get_bool('spasEnabled'):
       ret.steerActuatorDelay = 0.1
     else:
-      ret.steerActuatorDelay = 0.1
+      ret.steerActuatorDelay = 0.0
 
     tire_stiffness_factor = 1.
     ret.steerLimitTimer = 2.5
