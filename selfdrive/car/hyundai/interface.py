@@ -403,7 +403,7 @@ class CarInterface(CarInterfaceBase):
       if not UseLQR:
         ret.lateralTuning.init('indi')
         ret.lateralTuning.indi.innerLoopGainBP = [0.]
-        ret.lateralTuning.indi.innerLoopGainV = [3.65]
+        ret.lateralTuning.indi.innerLoopGainV = [3.62]
         ret.lateralTuning.indi.outerLoopGainBP = [0.]
         ret.lateralTuning.indi.outerLoopGainV = [2.5]
         ret.lateralTuning.indi.timeConstantBP = [0.]
