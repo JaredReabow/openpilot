@@ -49,9 +49,9 @@ class CarInterface(CarInterfaceBase):
     # lateral LQR global hyundai
     if UseLQR:
       ret.lateralTuning.init('lqr')
-      ret.lateralTuning.lqr.scale = 1750
-      ret.lateralTuning.lqr.ki = 0.04
-      ret.lateralTuning.lqr.dcGain = 0.0049
+      ret.lateralTuning.lqr.scale = 1800
+      ret.lateralTuning.lqr.ki = 0.045
+      ret.lateralTuning.lqr.dcGain = 0.0050
 
       ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
       ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
