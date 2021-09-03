@@ -345,6 +345,8 @@ class CarState(CarStateBase):
       ("PRESSURE_FR", "TPMS11", 0),
       ("PRESSURE_RL", "TPMS11", 0),
       ("PRESSURE_RR", "TPMS11", 0),
+      
+      ("SpeedLim_Nav_Clu", "Navi_HU", 0),
     ]
     if CP.sccBus == 0 and CP.pcmCruise:
       signals += [
@@ -526,14 +528,6 @@ class CarState(CarStateBase):
           ("CF_Mdps_Stat", "MDPS11", 0),
         ]
         checks += [("MDPS11", 100)]
-    if Params().get_bool("HyundaiNaviSL"):
-      signals += [
-        ("SpeedLim_Nav_Clu", "Navi_HU", 0),
-      ]
-
-      checks += [
-        ("Navi_HU", 5)
-      ]
 
     return CANParser(DBC[CP.carFingerprint]['pt'], signals, checks, 0, enforce_checks=False)
 
