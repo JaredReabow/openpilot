@@ -59,8 +59,8 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.lqr.k = [-110., 451.]
       ret.lateralTuning.lqr.l = [0.33, 0.318]
 
-    if not Params().get_bool('spasEnabled'):
-      ret.steerActuatorDelay = 0.1
+    if not Params().get_bool('UseLQR'):
+      ret.steerActuatorDelay = 0.2
     else:
       ret.steerActuatorDelay = 0.1
 
