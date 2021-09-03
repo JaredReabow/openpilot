@@ -599,19 +599,11 @@ EVENTS: Dict[int, Dict[str, Union[Alert, Callable[[Any, messaging.SubMaster, boo
       Priority.LOW, VisualAlert.none, AudibleAlert.chimePrompt, 1., 0., 2.),
   },
 
-  EventName.speedLimitDecrease: {
+  EventName.speedLimitValueChange: {
     ET.WARNING: Alert(
-      "Decreasing speed to match new speed limit",
+      "Adjusting Longitudingal Plan to match new speed limit",
       "",
       AlertStatus.normal, AlertSize.small,
-      Priority.LOW, VisualAlert.none, AudibleAlert.chimePrompt, 1., 0., 2.),
-  },
-
-  EventName.speedLimitIncrease: {
-    ET.WARNING: Alert(
-      "Higher speed limit detected",
-      "Increasing vehicle speed after short delay",
-      AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimePrompt, 1., 0., 2.),
   },
 
