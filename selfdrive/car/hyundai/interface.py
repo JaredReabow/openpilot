@@ -398,7 +398,7 @@ class CarInterface(CarInterfaceBase):
       tire_stiffness_factor = 1.0
       ret.mass = 1640.0 + STD_CARGO_KG
       ret.wheelbase = 2.84
-      ret.steerRatio = 14.25
+      ret.steerRatio = 14.35
       ret.centerToFront = ret.wheelbase * 0.4
       if not UseLQR:
         ret.lateralTuning.init('indi')
