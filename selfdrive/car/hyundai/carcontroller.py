@@ -176,8 +176,6 @@ class CarController():
     if self.turning_indicator_alert and enabled: # set and clear by interface
       lkas_active = False
       spas_active = False
-      if not self.turning_indicator_alert:
-        spas_active = True
 
     if self.turning_signal_timer > 0:
       self.turning_signal_timer -= 1  
