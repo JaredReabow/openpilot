@@ -145,6 +145,7 @@ class CarController():
       spas_active = False
     if CS.spas_enabled:
       if enabled and TQ <= CS.out.steeringWheelTorque <= -TQ:
+        self.override = True
         spas_active = False
     if not lkas_active:
       apply_steer = 0
