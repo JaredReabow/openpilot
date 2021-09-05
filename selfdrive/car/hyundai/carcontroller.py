@@ -149,7 +149,8 @@ class CarController():
         spas_active = False
     if not lkas_active:
       apply_steer = 0
-
+    if lkas_active and self.spas_active_last: 
+      apply_steer = 0
     
     UseSMDPS = Params().get_bool('UseSMDPSHarness')
     if Params().get_bool('LongControlEnabled'):
@@ -321,6 +322,9 @@ class CarController():
                                       obj_gap, CS.scc14))
       self.scc12_cnt += 1
 
+
+    self.spas_active_last = spas_active
+    self.lkas_active_last = lkas_active
     # 20 Hz LFA MFA message
     if frame % 5 == 0:
       activated_hda = road_speed_limiter_get_active()

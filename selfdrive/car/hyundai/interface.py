@@ -629,7 +629,7 @@ class CarInterface(CarInterfaceBase):
     if Params().get_bool('spasEnabled'):
       if not self.CC.lkas_active and self.CS.mdps11_stat == 7: # We need to alert driver when SPAS abort or fail.
         events.add(EventName.steerSaturated)
-        if not self.CC.turning_indicator_alert and not self.CC.lkas_active and self.CC.override:
+        if self.CC.override and not self.CC.turning_indicator_alert and not self.CC.lkas_active:
           events.add(EventName.buttonCancel)
       if not self.CC.lkas_active and (self.CS.mdps11_stat == 6 or self.CS.mdps11_stat == 8):
         events.add(EventName.steerTempUnavailable)
