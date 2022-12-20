@@ -65,7 +65,7 @@ def register(show_spinner=False) -> Optional[str]:
     params.put("IMEI", imei1)
     params.put("HardwareSerial", serial)
 
-    backoff = 0
+    backoff = 3
     start_time = time.monotonic()
     while True:
       try:
@@ -83,7 +83,7 @@ def register(show_spinner=False) -> Optional[str]:
         break
       except Exception:
         cloudlog.exception("failed to authenticate")
-        backoff = min(backoff + 1, 15)
+        backoff = min(backoff + 1, 1)
         time.sleep(backoff)
 
       if time.monotonic() - start_time > 60 and show_spinner:
