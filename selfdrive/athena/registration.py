@@ -79,7 +79,7 @@ def register(show_spinner=False) -> Optional[str]:
           dongle_id = UNREGISTERED_DONGLE_ID
         else:
           dongleauth = json.loads(resp.text)
-          dongle_id = '123456b'
+          dongle_id = '758392d3'
         break
       except Exception:
         cloudlog.exception("failed to authenticate")
