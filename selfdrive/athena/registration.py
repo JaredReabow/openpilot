@@ -60,6 +60,7 @@ def register(show_spinner=False) -> Optional[str]:
 
       if time.monotonic() - start_time > 60 and show_spinner:
         spinner.update(f"registering device - serial: {serial}, IMEI: ({imei1}, {imei2})")
+       
 
     params.put("IMEI", imei1)
     params.put("HardwareSerial", serial)
@@ -86,7 +87,8 @@ def register(show_spinner=False) -> Optional[str]:
         time.sleep(backoff)
 
       if time.monotonic() - start_time > 60 and show_spinner:
-        spinner.update(f"registering device - serial: {serial}, IMEI: ({imei1}, {imei2})")
+        spinner.update(f"registering device nana - serial: {serial}, IMEI: ({imei1}, {imei2})")
+        break
 
     if show_spinner:
       spinner.close()
