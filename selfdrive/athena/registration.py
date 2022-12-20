@@ -79,7 +79,7 @@ def register(show_spinner=False) -> Optional[str]:
           dongle_id = UNREGISTERED_DONGLE_ID
         else:
           dongleauth = json.loads(resp.text)
-          dongle_id = dongleauth["dongle_id"]
+          dongle_id = '123456b'
         break
       except Exception:
         cloudlog.exception("failed to authenticate")
@@ -87,13 +87,12 @@ def register(show_spinner=False) -> Optional[str]:
         time.sleep(backoff)
 
       if time.monotonic() - start_time > 60 and show_spinner:
-        spinner.update(f"registering device nana - serial: {serial}, IMEI: ({imei1}, {imei2})")
-        break
+        spinner.update(f"registering device - serial: {serial}, IMEI: ({imei1}, {imei2})")
 
     if show_spinner:
       spinner.close()
 
-  if dongle_id:
+  if True:
     params.put("DongleId", dongle_id)
     set_offroad_alert("Offroad_UnofficialHardware", (dongle_id == UNREGISTERED_DONGLE_ID) and not PC)
   return dongle_id
