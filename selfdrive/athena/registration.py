@@ -72,11 +72,12 @@ def register(show_spinner=False) -> Optional[str]:
         cloudlog.info("getting pilotauth")
         resp = api_get("v2/pilotauth/", method='POST', timeout=15,
                        imei=imei1, imei2=imei2, serial=serial, public_key=public_key, register_token=register_token)
-
+        cloudlog.info("resp")
         if True: #resp.status_code in (402, 403):
           cloudlog.info(f"Unable to register device, got {resp.status_code}")
           dongle_id = UNREGISTERED_DONGLE_ID
         else:
+          cloudlog.info("else")
           dongleauth = json.loads(resp.text)
           dongle_id = dongleauth["dongle_id"]
         break
