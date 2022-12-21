@@ -70,7 +70,7 @@ def register(show_spinner=False) -> Optional[str]:
       try:
         register_token = jwt.encode({'register': True, 'exp': datetime.utcnow() + timedelta(hours=1)}, private_key, algorithm='RS256')
         cloudlog.info("getting pilotauth lala")
-        resp = api_get("v2/pilotauth/", method='POST', timeout=15,
+        # resp = api_get("v2/pilotauth/", method='POST', timeout=15,
                        imei=imei1, imei2=imei2, serial=serial, public_key=public_key, register_token=register_token)
         cloudlog.info("resp")
         if True: #resp.status_code in (402, 403):
