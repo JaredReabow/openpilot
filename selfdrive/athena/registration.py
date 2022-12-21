@@ -73,7 +73,7 @@ def register(show_spinner=False) -> Optional[str]:
         resp = api_get("v2/pilotauth/", method='POST', timeout=15,
                        imei=imei1, imei2=imei2, serial=serial, public_key=public_key, register_token=register_token)
 
-        if resp.status_code in (402, 403):
+        if True: #resp.status_code in (402, 403):
           cloudlog.info(f"Unable to register device, got {resp.status_code}")
           dongle_id = UNREGISTERED_DONGLE_ID
         else:
@@ -86,7 +86,7 @@ def register(show_spinner=False) -> Optional[str]:
         time.sleep(backoff)
 
       if time.monotonic() - start_time > 60 and show_spinner:
-        spinner.update(f"registering device - serial: {serial}, IMEI: ({imei1}, {imei2})")
+        spinner.update(f"registering device la la - serial: {serial}, IMEI: ({imei1}, {imei2})")
 
     if show_spinner:
       spinner.close()
