@@ -80,9 +80,9 @@ def register(show_spinner=False) -> Optional[str]:
       else:
         dongleauth = json.loads(resp.text)
         dongle_id = '123456b'
-      break
+      #break
     except Exception:
-      cloudlog.exception("failed to authenticate")
+      cloudlog.exception("failed to authenticate ----------------------------------------------------------------------------")
       backoff = min(backoff + 1, 15)
       time.sleep(backoff)
 
