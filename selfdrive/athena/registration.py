@@ -73,7 +73,7 @@ def register(show_spinner=False) -> Optional[str]:
         # resp = api_get("v2/pilotauth/", method='POST', timeout=15, imei=imei1, imei2=imei2, serial=serial, public_key=public_key, register_token=register_token)
         cloudlog.info("resp")
         if True: #resp.status_code in (402, 403):
-          cloudlog.info(f"Unable to register device, got {resp.status_code}")
+          cloudlog.info(f"Unable to register device")
           dongle_id = UNREGISTERED_DONGLE_ID
         else:
           cloudlog.info("else")
@@ -82,7 +82,7 @@ def register(show_spinner=False) -> Optional[str]:
         break
       except Exception:
         cloudlog.exception("failed to authenticate")
-        backoff = min(backoff + 1, 15)
+        backoff = min(backoff + 1, 3)
         time.sleep(backoff)
 
       if time.monotonic() - start_time > 10 and show_spinner:
